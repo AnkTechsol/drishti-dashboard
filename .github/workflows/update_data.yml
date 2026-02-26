@@ -1,0 +1,52 @@
+name: Update Intelligence Data
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'  # Run every 12 hours
+  workflow_dispatch:      # Allow manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Fetch Latest Intelligence
+        run: python fetch_data.py
+
+      - name: Build & Obfuscate (Minimal Protection)
+        run: |
+          sudo apt-get install -y html-minifier
+          # Minify index.html to a build folder to "hide" raw source format
+          mkdir -p build
+          # Basic minification to make it harder to read/copy easily
+          html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype index.html -o build/index.html
+          # Move data.json to build as well
+          cp data.json build/
+
+      - name: Commit Updated Data
+        run: |
+          git config --global user.name 'DRISHTI-Bot'
+          git config --global user.email 'bot@anktechsol.com'
+          git add data.json
+          git commit -m "Automated Data Update: $(date -u)" || echo "No changes to commit"
+          git push
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build # Deploy the obfuscated build folder
+          branch: gh-pages

@@ -1,0 +1,254 @@
+{
+  "ai": [
+    {
+      "h": "Converge Bio raises $25M, backed by Bessemer and execs from Meta, OpenAI, Wiz",
+      "s": "AI drug discovery startup Converge Bio raised $25 million in a Series A led by Bessemer Venture Partners, with additional backing from executives at Meta, OpenAI, and Wiz....",
+      "src": "AI Watch",
+      "link": "https://techcrunch.com/2026/01/13/ai-drug-discovery-startup-converge-bio-pulls-in-25m-from-bessemer-and-execs-from-meta-openai-and-wiz/",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Meta bought 1 GW of solar this week",
+      "s": "The social media company inked three deals in the U.S. to power its data centers and offset its carbon footprint....",
+      "src": "AI Watch",
+      "link": "https://techcrunch.com/2025/10/31/meta-bought-1-gw-of-solar-this-week/",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "How one AI startup is helping rice farmers battle climate change",
+      "s": "Mitti Labs is working with The Nature Conservancy to expand the use of climate-friendly rice farming practices in India. The startup uses its AI to verify reductions in methane emissions....",
+      "src": "AI Watch",
+      "link": "https://techcrunch.com/2025/08/26/how-one-ai-startup-is-helping-rice-farmers-battle-climate-change/",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Harvard dropouts to launch \u2018always on\u2019 AI smart glasses that listen and record every conversation",
+      "s": "After developing a facial-recognition app for Meta\u2019s Ray-Ban glasses and doxing random people, two former Harvard students are now launching a startup that makes smart glasses with an always-on microp...",
+      "src": "AI Watch",
+      "link": "https://techcrunch.com/2025/08/20/harvard-dropouts-to-launch-always-on-ai-smart-glasses-that-listen-and-record-every-conversation/",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Meta to add 100MW of solar power from US gear",
+      "s": "The social media company is adding another tranche of solar to power a new AI data center in South Carolina....",
+      "src": "AI Watch",
+      "link": "https://techcrunch.com/2025/08/20/meta-to-add-100-mw-of-solar-power-from-u-s-gear/",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Disrupting malicious uses of AI | February 2026",
+      "s": "Our latest threat report examines how malicious actors combine AI models with websites and social platforms\u2014and what it means for detection and defense....",
+      "src": "AI Watch",
+      "link": "https://openai.com/index/disrupting-malicious-ai-uses",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Arvind KC appointed Chief People Officer",
+      "s": "OpenAI appoints Arvind KC as Chief People Officer to help scale the company, strengthen its culture, and lead how work evolves in the age of AI....",
+      "src": "AI Watch",
+      "link": "https://openai.com/index/arvind-kc-chief-people-officer",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Why we no longer evaluate SWE-bench Verified",
+      "s": "SWE-bench Verified is increasingly contaminated and mismeasures frontier coding progress. Our analysis shows flawed tests and training leakage. We recommend SWE-bench Pro....",
+      "src": "AI Watch",
+      "link": "https://openai.com/index/why-we-no-longer-evaluate-swe-bench-verified",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "OpenAI announces Frontier Alliance Partners",
+      "s": "OpenAI announces Frontier Alliance Partners to help enterprises move from AI pilots to production with secure, scalable agent deployments....",
+      "src": "AI Watch",
+      "link": "https://openai.com/index/frontier-alliance-partners",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Our First Proof submissions",
+      "s": "We share our AI model\u2019s proof attempts for the First Proof math challenge, testing research-grade reasoning on expert-level problems....",
+      "src": "AI Watch",
+      "link": "https://openai.com/index/first-proof-submissions",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Deploying Open Source Vision Language Models (VLM) on Jetson",
+      "s": "...",
+      "src": "AI Watch",
+      "link": "https://huggingface.co/blog/nvidia/cosmos-on-jetson",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "GGML and llama.cpp join HF to ensure the long-term progress of Local AI",
+      "s": "...",
+      "src": "AI Watch",
+      "link": "https://huggingface.co/blog/ggml-joins-hf",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Train AI models with Unsloth and Hugging Face Jobs for FREE",
+      "s": "...",
+      "src": "AI Watch",
+      "link": "https://huggingface.co/blog/unsloth-jobs",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "IBM and UC Berkeley Diagnose Why Enterprise Agents Fail Using IT-Bench and MAST",
+      "s": "...",
+      "src": "AI Watch",
+      "link": "https://huggingface.co/blog/ibm-research/itbenchandmast",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "One-Shot Any Web App with Gradio's gr.HTML",
+      "s": "...",
+      "src": "AI Watch",
+      "link": "https://huggingface.co/blog/gradio-html-one-shot-apps",
+      "time": "12:17 UTC"
+    }
+  ],
+  "policy": [
+    {
+      "h": "Central African Republic enters \u2018decisive\u2019 phase after landmark elections",
+      "s": "Fresh from holding the most extensive elections in its history, the Central African Republic (CAR) is entering what the UN\u2019s top envoy in the country describes as a \u201cdecisive period\u201d in consolidating ...",
+      "src": "Global Policy",
+      "link": "https://news.un.org/feed/view/en/story/2026/02/1167036",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Ukraine: \u2018Use every diplomatic tool to end this war\u2019, top UN official tells Security Council",
+      "s": "The international community must \u201cuse every diplomatic tool\u201d to bring an end to the war in Ukraine, a senior UN official told the Security Council on Tuesday as Russia\u2019s full-scale invasion entered a ...",
+      "src": "Global Policy",
+      "link": "https://news.un.org/feed/view/en/story/2026/02/1167032",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "\u2018I dream of a safe life\u2019: Gaza\u2019s children share the future they want",
+      "s": "Children in Gaza are voicing their demands for the future through a UN-run initiative that seeks to amplify their voices and restore the \u201cfundamentals of childhood\u201d....",
+      "src": "Global Policy",
+      "link": "https://news.un.org/feed/view/en/story/2026/02/1167030",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "LIVE: UN marks fourth anniversary of Russia\u2019s full-scale invasion of Ukraine",
+      "s": "Four years after Russia launched its full-scale invasion of Ukraine, the UN is marking the day with high-level debate and renewed calls to end the war - including in the General Assembly which passed ...",
+      "src": "Global Policy",
+      "link": "https://news.un.org/feed/view/en/story/2026/02/1167022",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Ukraine wakes to more violence as Russia\u2019s full-scale invasion enters fifth year",
+      "s": "The full-scale invasion of Ukraine by Russian troops on 24 February 2022 shattered the peaceful aspirations of an entire continent, but war must never be the new normal, UN General Assembly President ...",
+      "src": "Global Policy",
+      "link": "https://news.un.org/feed/view/en/story/2026/02/1167023",
+      "time": "12:17 UTC"
+    },
+    {
+      "h": "Shot in school uniform: BBC reveals police order led to Gen Z protest killings in Nepal",
+      "s": "New evidence reveals what happened when 19 people were shot dead in  Kathmandu last September....",
+      "src": "Global Policy",
+      "link": "https://www.bbc.com/news/articles/c4g5qx357dzo?at_medium=RSS&at_campaign=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "'Fear is everywhere': BBC reports from Mexican city turned into war zone by drug cartel feud",
+      "s": "Culiac\u00e1n in northern Mexico has seen a surge in violence as rival factions of the Sinaloa cartel battle for control....",
+      "src": "Global Policy",
+      "link": "https://www.bbc.com/news/articles/cx2g3vmde0eo?at_medium=RSS&at_campaign=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Israeli soldiers shot a Palestinian boy and stood around as he bled to death, video shows",
+      "s": "Israeli forces blocked Palestinian ambulances while a 14-year-old lay bleeding for at least 45 minutes....",
+      "src": "Global Policy",
+      "link": "https://www.bbc.com/news/articles/cpqwv9vvzx9o?at_medium=RSS&at_campaign=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Cuba says it shot dead four people on US-registered speedboat",
+      "s": "The passengers were Cuban nationals living in the US and intended to \"carry out an infiltration for terrorist purposes\", the Cuban government says....",
+      "src": "Global Policy",
+      "link": "https://www.bbc.com/news/articles/c24drvj8yl2o?at_medium=RSS&at_campaign=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "US and Iran to hold talks as pressure for nuclear deal builds",
+      "s": "The indirect negotiations are seen as a last-ditch effort to prevent a conflict, but the chances of a nuclear agreement are unclear....",
+      "src": "Global Policy",
+      "link": "https://www.bbc.com/news/articles/cvg1vd95nl9o?at_medium=RSS&at_campaign=rss",
+      "time": "12:18 UTC"
+    }
+  ],
+  "war": [
+    {
+      "h": "Florida Boat in Gunfight Had Cuban Nationals Intent on \u2018Infiltration,\u2019 Cuba Says",
+      "s": "Four people were killed and six others wounded after Cuban border troops engaged in a gunfight near the island\u2019s coast, the Cuban Interior Ministry said....",
+      "src": "War & Conflict",
+      "link": "https://www.nytimes.com/live/2026/02/25/world/cuba-speedboat-florida-deaths",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "U.S. Will Offer Embassy Services in a West Bank Settlement for the First Time",
+      "s": "Palestinians and Israelis on the right and left all say that the move is a step toward legitimizing the Israeli settlements, which most of the world considers illegal....",
+      "src": "War & Conflict",
+      "link": "https://www.nytimes.com/2026/02/25/world/middleeast/us-consular-services-israeli-settlements.html",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Inside Nicol\u00e1s Maduro\u2019s Last Days as Venezuela\u2019s Leader",
+      "s": "The Venezuelan leader overestimated his strength and misread his exchange with President Trump in the decisive weeks before his capture by U.S. forces....",
+      "src": "War & Conflict",
+      "link": "https://www.nytimes.com/2026/02/25/world/americas/maduro-venezuela-us-capture-trump.html",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Thanks, Ukrainians Say, but Please Stop Calling Us Resilient",
+      "s": "Ukraine must project strength to secure continued Western support. But its people want the world to know they are not superhuman....",
+      "src": "War & Conflict",
+      "link": "https://www.nytimes.com/2026/02/25/world/europe/ukrainian-war-resilience.html",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "45 Years After Failed Coup, Spain Declassifies Files About Why It Failed",
+      "s": "Ending more than four decades of conjecture, the Spanish government moved to publish documents from a long-secret investigation of a failed 1981 coup....",
+      "src": "War & Conflict",
+      "link": "https://www.nytimes.com/2026/02/25/world/europe/spain-coup-1981-files-revealed.html",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Ramadan in Iraq\u2019s Mosul: Living traditions between past and present",
+      "s": "Mosul revives Ramadan traditions, markets and storytelling as worship, games and charity return after years of war....",
+      "src": "War & Conflict",
+      "link": "https://www.aljazeera.com/gallery/2026/2/26/ramadan-in-iraqs-mosul-living-traditions-between-past-and-present?traffic_source=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "UK far-right activist Tommy Robinson talks up US State Department visit",
+      "s": "Robinson is notorious in the UK where he has been accused of promoting hatred against Muslims and migrants....",
+      "src": "War & Conflict",
+      "link": "https://www.aljazeera.com/news/2026/2/26/uk-far-right-activist-tommy-robinson-talks-up-us-state-department-visit?traffic_source=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "Hong Kong appeals court overturns Jimmy Lai\u2019s fraud conviction",
+      "s": "Surprise ruling comes weeks after the media mogul was convicted and jailed for 20 years on national security charges....",
+      "src": "War & Conflict",
+      "link": "https://www.aljazeera.com/news/2026/2/26/hong-kong-appeals-court-overturns-jimmy-lais-fraud-conviction?traffic_source=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "US-Iran talks live: Nuclear talks to kick off in Geneva amid tensions",
+      "s": "Third round of indirect negotiations to take place amid a massive US military build-up in the Middle East....",
+      "src": "War & Conflict",
+      "link": "https://www.aljazeera.com/news/liveblog/2026/2/26/us-iran-talks-live-nuclear-talks-to-kick-off-in-geneva-amid-tensions?traffic_source=rss",
+      "time": "12:18 UTC"
+    },
+    {
+      "h": "North Korea\u2019s Kim Jong Un warns South Korea, says US should end hostility",
+      "s": "Kim emphasised that Pyongyang intends to cement its position on the global stage through its nuclear capabilities....",
+      "src": "War & Conflict",
+      "link": "https://www.aljazeera.com/news/2026/2/26/north-koreas-kim-jong-un-warns-south-korea-says-us-should-end-hostility?traffic_source=rss",
+      "time": "12:18 UTC"
+    }
+  ],
+  "updated": "2026-02-26 12:17:56 UTC"
+}
