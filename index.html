@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#0b0a0f"/>
+<meta name="description" content="DRISHTI by ANKTechSol — Your single source of truth for AI, Global Policy & Conflict Intelligence."/>
+<meta property="og:title" content="DRISHTI दृष्टि — ANKTechSol Intelligence Dashboard"/>
+<meta property="og:description" content="See Everything. Know Everything. The world's news in one place."/>
+<title>DRISHTI दृष्टि — ANKTechSol</title>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Tiro+Devanagari+Hindi:ital@0;1&family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════ ROOT ═══════════════════════════ */
+:root {
+  --bg:#0b0a0f; --bg2:#100f17;
+  --surface:#14121e; --surface2:#1c1928; --surface3:#221f30;
+  --border:#2a2640; --border2:#352f50;
+  --saffron:#ff9933; --gold:#f5c518; --chakra:#0070b8;
+  --green:#138808; --crimson:#e63946; --teal:#00b4d8; --violet:#9b72cf;
+  --text:#c8c0e0; --text-dim:#6b6285; --text-bright:#f0ecff; --text-muted:#4a4466;
+  --radius:6px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:16px;min-height:100vh;overflow-x:hidden;}
+body::after{content:'';position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(600px,100vw);height:min(600px,100vw);background:radial-gradient(circle at center,rgba(255,153,51,0.03) 0%,rgba(0,112,184,0.04) 40%,transparent 70%);border-radius:50%;pointer-events:none;z-index:0;}
+
+/* ═══════════════════════════ DISCLAIMER MODAL ═══════════════════════════ */
+#disclaimer-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;
+  display:flex;align-items:center;justify-content:center;padding:16px;
+  backdrop-filter:blur(6px);
+}
+#disclaimer-box{
+  background:var(--surface);border:1px solid var(--saffron);border-radius:8px;
+  max-width:560px;width:100%;max-height:90vh;overflow-y:auto;
+  box-shadow:0 0 60px rgba(255,153,51,0.2);
+  animation:modal-in 0.3s ease;
+}
+@keyframes modal-in{from{opacity:0;transform:scale(0.95)}to{opacity:1;transform:scale(1)}}
+.disc-header{
+  padding:18px 20px 14px;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(255,153,51,0.08),rgba(0,112,184,0.06));
+  display:flex;align-items:flex-start;gap:12px;
+}
+.disc-flag{font-size:2rem;flex-shrink:0;}
+.disc-title-block{}
+.disc-title{font-family:'Yatra One',cursive;font-size:1.3rem;color:var(--saffron);letter-spacing:2px;}
+.disc-sub{font-size:0.65rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);letter-spacing:2px;margin-top:2px;}
+.disc-body{padding:18px 20px;}
+.disc-section{margin-bottom:14px;}
+.disc-section-title{
+  font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:3px;
+  color:var(--saffron);text-transform:uppercase;margin-bottom:7px;
+  display:flex;align-items:center;gap:6px;
+}
+.disc-section-title::before{content:'◈';}
+.disc-text{font-size:0.82rem;line-height:1.65;color:var(--text-dim);}
+.disc-text strong{color:var(--text-bright);}
+.disc-text a{color:var(--chakra);text-decoration:none;}
+.disc-text a:hover{color:var(--teal);}
+.disc-sources{
+  background:var(--surface2);border:1px solid var(--border);border-radius:4px;
+  padding:10px 12px;margin-top:8px;
+  display:grid;grid-template-columns:1fr 1fr;gap:4px;
+}
+.disc-src-item{font-size:0.68rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);}
+.disc-src-item::before{content:'→ ';}
+.disc-warning{
+  background:rgba(230,57,70,0.07);border:1px solid rgba(230,57,70,0.25);
+  border-radius:4px;padding:10px 12px;margin-top:8px;
+}
+.disc-warning-text{font-size:0.78rem;color:var(--crimson);line-height:1.6;}
+.disc-footer{
+  padding:14px 20px;border-top:1px solid var(--border);
+  display:flex;flex-direction:column;gap:10px;
+}
+.disc-agree{
+  background:linear-gradient(135deg,var(--saffron),#e67e00);color:#000;
+  border:none;padding:12px 20px;border-radius:4px;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.9rem;
+  cursor:pointer;letter-spacing:1px;width:100%;
+  transition:opacity 0.2s;
+}
+.disc-agree:hover{opacity:0.88;}
+.disc-agree:disabled{opacity:0.5;cursor:not-allowed;}
+.disc-check{
+  display:flex;align-items:center;gap:8px;cursor:pointer;
+  font-size:0.78rem;color:var(--text-dim);
+}
+.disc-check input{accent-color:var(--saffron);}
+
+/* ═══════════════════════════ BOOKMARK BANNER ═══════════════════════════ */
+#bookmark-banner{
+  background:linear-gradient(135deg,var(--saffron),#e67e00);
+  padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  position:relative;z-index:200;
+}
+.bm-left{display:flex;align-items:center;gap:10px;}
+.bm-icon{font-size:1.3rem;}
+.bm-text{font-size:0.82rem;font-weight:600;color:#000;line-height:1.3;}
+.bm-text small{display:block;font-weight:400;font-size:0.7rem;opacity:0.75;}
+.bm-btns{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.bm-btn{background:#000;color:var(--saffron);border:none;padding:6px 14px;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:0.75rem;border-radius:4px;cursor:pointer;letter-spacing:1px;white-space:nowrap;}
+.bm-dismiss{background:none;border:none;color:rgba(0,0,0,0.5);font-size:1.1rem;cursor:pointer;padding:4px;}
+.bm-hide{display:none!important;}
+
+/* ═══════════════════════════ HEADER ═══════════════════════════ */
+header{background:var(--surface);border-bottom:2px solid var(--saffron);padding:0 16px;position:sticky;top:0;z-index:150;box-shadow:0 2px 20px rgba(255,153,51,0.12);}
+.header-main{display:flex;align-items:center;justify-content:space-between;padding:10px 0;gap:12px;}
+.brand-block{display:flex;align-items:center;gap:12px;}
+.brand-logo{display:flex;flex-direction:column;align-items:flex-start;}
+.brand-name{font-family:'Yatra One',cursive;font-size:1.6rem;color:var(--saffron);letter-spacing:2px;line-height:1;text-shadow:0 0 20px rgba(255,153,51,0.4);}
+.brand-deva{font-family:'Tiro Devanagari Hindi',serif;font-size:0.75rem;color:var(--gold);letter-spacing:3px;opacity:0.8;}
+.brand-by{border-left:1px solid var(--border2);padding-left:12px;display:flex;flex-direction:column;}
+.brand-by-label{font-size:0.55rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace;letter-spacing:2px;text-transform:uppercase;}
+.brand-by-name{font-size:0.8rem;font-weight:700;color:var(--chakra);font-family:'JetBrains Mono',monospace;letter-spacing:1px;}
+.brand-by-name a{color:inherit;text-decoration:none;}
+.brand-by-name a:hover{color:var(--teal);}
+.header-right{display:flex;align-items:center;gap:10px;}
+.live-pill{display:flex;align-items:center;gap:6px;background:rgba(230,57,70,0.12);border:1px solid rgba(230,57,70,0.3);border-radius:100px;padding:4px 10px;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--crimson);animation:blink 1.2s infinite;}
+.live-txt{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--crimson);letter-spacing:2px;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+#clock-display{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text-dim);display:none;}
+.tagline-strip{padding:4px 0;border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.tagline-text{font-size:0.65rem;color:var(--gold);font-family:'JetBrains Mono',monospace;letter-spacing:2px;opacity:0.8;}
+.chakra-divider{color:var(--chakra);opacity:0.5;font-size:0.6rem;}
+
+/* ═══════════════════════════ TICKER ═══════════════════════════ */
+.ticker-bar{background:linear-gradient(90deg,#e63946,#c1121f);display:flex;align-items:stretch;overflow:hidden;}
+.ticker-tag{background:#000;color:var(--crimson);font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;letter-spacing:3px;padding:0 14px;display:flex;align-items:center;white-space:nowrap;flex-shrink:0;border-right:1px solid rgba(255,255,255,0.1);}
+.ticker-scroll{overflow:hidden;flex:1;padding:7px 0;}
+.ticker-inner{display:flex;animation:scroll-x 50s linear infinite;width:max-content;}
+.ticker-inner:hover{animation-play-state:paused;}
+.t-item{color:#fff;font-size:0.72rem;font-weight:600;white-space:nowrap;padding:0 32px;letter-spacing:0.5px;}
+.t-item::before{content:'◈  ';opacity:0.6;}
+@keyframes scroll-x{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════ STATS STRIP ═══════════════════════════ */
+.stats-strip{display:flex;gap:0;background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;}
+.stats-strip::-webkit-scrollbar{display:none;}
+.sstat{padding:10px 20px;border-right:1px solid var(--border);flex-shrink:0;min-width:140px;cursor:pointer;transition:background 0.2s;}
+.sstat:hover{background:rgba(255,255,255,0.03);}
+.sstat-label{font-size:0.58rem;font-family:'JetBrains Mono',monospace;letter-spacing:2px;color:var(--text-muted);text-transform:uppercase;margin-bottom:3px;}
+.sstat-val{font-family:'Yatra One',cursive;font-size:1.3rem;letter-spacing:1px;line-height:1;}
+.sstat-delta{font-size:0.6rem;font-family:'JetBrains Mono',monospace;margin-top:1px;}
+.up{color:var(--green);}.dn{color:var(--crimson);}.neu{color:var(--text-dim);}
+.c-s{color:var(--saffron);}.c-g{color:var(--gold);}.c-c{color:var(--chakra);}.c-t{color:var(--teal);}.c-v{color:var(--violet);}
+
+/* ═══════════════════════════ CONTROL BAR ═══════════════════════════ */
+.control-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:0 16px;display:flex;align-items:center;gap:0;overflow-x:auto;scrollbar-width:none;}
+.control-bar::-webkit-scrollbar{display:none;}
+.ctrl-tab{display:flex;align-items:center;gap:7px;padding:12px 18px;background:none;border:none;color:var(--text-dim);font-family:'Rajdhani',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border-bottom:3px solid transparent;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.ctrl-tab:hover{color:var(--text);background:rgba(255,255,255,0.02);}
+.ctrl-tab.active{color:var(--saffron);border-color:var(--saffron);}
+.ctrl-tab.t-policy.active{color:var(--gold);border-color:var(--gold);}
+.ctrl-tab.t-war.active{color:var(--crimson);border-color:var(--crimson);}
+.ctrl-tab.t-lb.active{color:var(--green);border-color:var(--green);}
+.ctrl-tab.t-ctrl.active{color:var(--violet);border-color:var(--violet);}
+.ctrl-tab.t-chat.active{color:var(--teal);border-color:var(--teal);}
+.ctrl-tab.t-about.active{color:var(--chakra);border-color:var(--chakra);}
+.ctrl-icon{font-size:1rem;}
+
+/* ═══════════════════════════ PANELS ═══════════════════════════ */
+.panel{display:none;}
+.panel.active{display:block;animation:fadein 0.25s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+main{padding:16px;max-width:1400px;margin:0 auto;position:relative;z-index:1;}
+
+/* ═══════════════════════════ GRID ═══════════════════════════ */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+.g21{display:grid;grid-template-columns:2fr 1fr;gap:16px;}
+.span2{grid-column:1/-1;}
+@media(max-width:900px){.g2,.g3,.g21{grid-template-columns:1fr;}.span2{grid-column:1;}}
+
+/* ═══════════════════════════ CARDS ═══════════════════════════ */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--saffron),var(--gold),var(--chakra));opacity:0;transition:opacity 0.2s;}
+.card:hover::before{opacity:1;}
+.ch{padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:space-between;}
+.ch-title{font-size:0.65rem;font-family:'JetBrains Mono',monospace;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
+.cb{padding:14px;}
+.badge{font-size:0.55rem;font-family:'JetBrains Mono',monospace;letter-spacing:1px;padding:2px 8px;border-radius:3px;text-transform:uppercase;}
+
+.b-s{background:rgba(255,153,51,0.1);color:var(--saffron);border:1px solid rgba(255,153,51,0.25);}
+.b-g{background:rgba(245,197,24,0.1);color:var(--gold);border:1px solid rgba(245,197,24,0.25);}
+.b-c{background:rgba(0,112,184,0.12);color:var(--chakra);border:1px solid rgba(0,112,184,0.3);}
+.b-r{background:rgba(230,57,70,0.1);color:var(--crimson);border:1px solid rgba(230,57,70,0.3);}
+.b-v{background:rgba(155,114,207,0.1);color:var(--violet);border:1px solid rgba(155,114,207,0.3);}
+.b-t{background:rgba(0,180,216,0.1);color:var(--teal);border:1px solid rgba(0,180,216,0.3);}
+.b-gr{background:rgba(19,136,8,0.1);color:var(--green);border:1px solid rgba(19,136,8,0.3);}
+
+/* ═══════════════════════════ LEADERBOARD POINTERS ═══════════════════════════ */
+.pointer-modal{
+  position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2500;
+  display:none;align-items:center;justify-content:center;padding:20px;
+  backdrop-filter: blur(4px);
+}
+.pointer-box{
+  background:var(--surface);border:1px solid var(--green);border-radius:8px;
+  max-width:450px;width:100%;box-shadow:0 0 40px rgba(19,136,8,0.2);
+}
+.pb-head{padding:15px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;justify-content:space-between;align-items:center;}
+.pb-title{font-family:'Yatra One',cursive;font-size:1.2rem;color:var(--green);letter-spacing: 1px;}
+.pb-close{background:none;border:none;color:var(--text-dim);font-size:1.5rem;cursor:pointer;}
+.pb-body{padding:20px;}
+.p-point{margin-bottom:12px;display:flex;gap:10px;font-size:0.88rem;line-height:1.5;}
+.p-pt-bullet{color:var(--green);font-weight:700;}
+
+/* ═══════════════════════════ ABOUT SECTION CSS ═══════════════════════════ */
+.about-hero{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(0,112,184,0.05),transparent);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:24px;}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.about-card{background:var(--surface2);padding:24px;border:1px solid var(--border);border-radius:var(--radius);}
+.about-h3{font-family:'Yatra One',cursive;font-size:1.4rem;color:var(--chakra);margin-bottom:12px;display:flex;align-items:center;gap:10px;}
+.about-text{font-size:0.92rem;line-height:1.7;color:var(--text-dim);margin-bottom:15px;}
+.about-list{list-style:none;padding-left:0;}
+.about-list li{position:relative;padding-left:24px;margin-bottom:10px;font-size:0.88rem;color:var(--text-bright);}
+.about-list li::before{content:'◈';position:absolute;left:0;color:var(--chakra);}
+
+/* ═══════════════════════════ NEWS ITEMS ═══════════════════════════ */
+.ni{padding:11px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:padding-left 0.15s;}
+.ni:last-child{border-bottom:none;}
+.ni:hover{padding-left:6px; color: var(--saffron);}
+.ni-meta{display:flex;align-items:center;gap:6px;margin-bottom:5px;flex-wrap:wrap;}
+.ni-src{font-size:0.58rem;font-family:'JetBrains Mono',monospace;color:var(--saffron);letter-spacing:1px;}
+.ni-time{font-size:0.58rem;font-family:'JetBrains Mono',monospace;color:var(--text-muted);}
+.ni-headline{font-size:0.88rem;font-weight:600;color:var(--text-bright);line-height:1.4;margin-bottom:3px;}
+.ni-summary{font-size:0.75rem;color:var(--text-dim);line-height:1.5;}
+
+/* ═══════════════════════════ WORLD MAP (PLACEHOLDER STYLES) ═══════════════════════════ */
+#world-map-container{background:linear-gradient(160deg,#0d0b1a,#0a1020,#0d0b1a);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;position:relative;margin-bottom:16px;}
+.country-path{fill:#1a1830;stroke:#2a2640;stroke-width:0.5;transition:fill 0.2s;cursor:pointer;}
+.country-path:hover{fill:#2a2540;}
+.country-path.hot{fill:#5a1220;stroke:#e63946;}
+.country-path.india{fill:#1a2d10;stroke:#138808;}
+
+/* Leaderboard */
+.lb-table{width:100%;border-collapse:collapse;}
+.lb-table th{font-family:'JetBrains Mono',monospace;font-size:0.58rem;letter-spacing:2px;color:var(--text-muted);text-align:left;padding:9px 10px;border-bottom:1px solid var(--border);background:var(--surface2);text-transform:uppercase;}
+.lb-table td{padding:9px 10px;border-bottom:1px solid var(--border);font-size:0.82rem;vertical-align:middle;cursor:pointer;}
+.lb-table tr:hover td{background: rgba(255, 255, 255, 0.02);}
+.rk{font-family:'Yatra One',cursive;font-size:1.1rem;color:var(--text-muted);width:32px;}
+.rk1{color:var(--gold);}.rk2{color:var(--text-bright);}.rk3{color:#cd7f32;}
+.bar-wrap{display:flex;align-items:center;gap:8px;}
+.bar-track{flex:1;height:4px;background:var(--surface3);border-radius:2px;overflow:hidden;}
+.bar-fill{height:100%;border-radius:2px;}
+.bar-num{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--text-dim);min-width:28px;text-align:right;}
+
+/* Chat/AI */
+.chat-window{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);height:300px;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px;}
+.cmsg{padding:9px 12px;border-radius:4px;max-width:88%;font-size:0.8rem;line-height:1.5;}
+.cmsg.user{background:rgba(255,153,51,0.1);border:1px solid rgba(255,153,51,0.2);align-self:flex-end;color:var(--text-bright);}
+.cmsg.ai{background:var(--surface);border:1px solid var(--border);align-self:flex-start;}
+
+/* Widget */
+.widget-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;}
+.widget-box{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;text-align:center;cursor:pointer;transition:all 0.2s;}
+.widget-box:hover{border-color: var(--saffron); transform: translateY(-2px);}
+
+/* Mobile */
+@media(max-width:600px){
+  .brand-name{font-size:1.3rem;}
+  .sstat{min-width:100px;padding:8px 12px;}
+  .about-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════ DISCLAIMER MODAL ═══════════════════ -->
+<div id="disclaimer-overlay">
+  <div id="disclaimer-box">
+    <div class="disc-header">
+      <span class="disc-flag">🇮🇳</span>
+      <div class="disc-title-block">
+        <div class="disc-title">DRISHTI दृष्टि</div>
+        <div class="disc-sub">ANKTechSol.com · Content Disclaimer</div>
+      </div>
+    </div>
+    <div class="disc-body">
+      <div class="disc-section">
+        <div class="disc-section-title">About This Platform</div>
+        <p class="disc-text"><strong>DRISHTI</strong> is a free, non-commercial intelligence dashboard created by <strong>ANKTechSol.com</strong>. It aggregates publicly available news for informational purposes.</p>
+      </div>
+      <div class="disc-warning">
+        <p class="disc-warning-text">⚠️ Content covers armed conflict, geopolitics, and AI risk. Reader discretion is advised.</p>
+      </div>
+    </div>
+    <div class="disc-footer">
+      <label class="disc-check">
+        <input type="checkbox" id="disc-checkbox" onchange="document.getElementById('disc-agree-btn').disabled=!this.checked"/>
+        I have read and understood the disclaimer.
+      </label>
+      <button class="disc-agree" id="disc-agree-btn" disabled onclick="closeDisclaimer()">☸ I UNDERSTAND — ENTER DRISHTI</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ POINTER MODAL ═══════════════════ -->
+<div id="pointer-modal" class="pointer-modal" onclick="if(event.target===this)this.style.display='none'">
+  <div class="pointer-box" onclick="event.stopPropagation()">
+    <div class="pb-head">
+      <div class="pb-title" id="pb-title">Intelligence Detail</div>
+      <button class="pb-close" onclick="document.getElementById('pointer-modal').style.display='none'">✕</button>
+    </div>
+    <div class="pb-body" id="pb-body">
+      <!-- Dynamic Points -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <div class="header-main">
+    <div class="brand-block">
+      <div class="brand-logo">
+        <div class="brand-name">DRISHTI</div>
+        <div class="brand-deva">दृष्टि — देखो सब कुछ</div>
+      </div>
+      <div class="brand-by">
+        <span class="brand-by-label">Powered by</span>
+        <span class="brand-by-name"><a href="https://anktechsol.com" target="_blank">ANKTechSol.com</a></span>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="live-pill"><div class="live-dot"></div><span class="live-txt">LIVE</span></div>
+      <div id="clock-display">--:-- UTC</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker-bar" id="ticker-bar">
+  <div class="ticker-tag">DRISHTI LIVE</div>
+  <div class="ticker-scroll">
+    <div class="ticker-inner" id="ticker-content">
+      <!-- Content populated by script -->
+    </div>
+  </div>
+</div>
+
+<!-- ═══ STATS STRIP ═══ -->
+<div class="stats-strip">
+  <div class="sstat" onclick="showKpiDetail('ai')"><div class="sstat-label">AI Models</div><div class="sstat-val c-s">247</div><div class="sstat-delta up">▲ +34/mo</div></div>
+  <div class="sstat" onclick="showKpiDetail('war')"><div class="sstat-label">Conflicts</div><div class="sstat-val" style="color:var(--crimson)">38</div><div class="sstat-delta dn">▲ +2 wk</div></div>
+  <div class="sstat" onclick="showKpiDetail('policy')"><div class="sstat-label">Policy Acts</div><div class="sstat-val c-g">89</div><div class="sstat-delta up">▲ +7 nations</div></div>
+  <div class="sstat" onclick="showKpiDetail('invest')"><div class="sstat-label">AI Investment</div><div class="sstat-val c-t">$2.1T</div><div class="sstat-delta up">▲ +183%</div></div>
+</div>
+
+<!-- ═══ CONTROL TABS ═══ -->
+<nav class="control-bar">
+  <button class="ctrl-tab active" onclick="setTab('ai',this)"><span class="ctrl-icon">🤖</span>AI Watch</button>
+  <button class="ctrl-tab t-policy" onclick="setTab('policy',this)"><span class="ctrl-icon">🌍</span>Policy</button>
+  <button class="ctrl-tab t-war" onclick="setTab('war',this)"><span class="ctrl-icon">⚔️</span>War</button>
+  <button class="ctrl-tab t-lb" onclick="setTab('lb',this)"><span class="ctrl-icon">🏆</span>Leaderboard</button>
+  <button class="ctrl-tab t-chat" onclick="setTab('chat',this)"><span class="ctrl-icon">💬</span>Community</button>
+  <button class="ctrl-tab t-about" onclick="setTab('about',this)"><span class="ctrl-icon">ℹ️</span>About & Setup</button>
+  <button class="ctrl-tab t-ctrl" onclick="setTab('ctrl',this)"><span class="ctrl-icon">⚙️</span>Settings</button>
+</nav>
+
+<main>
+
+<!-- ▓▓▓ AI WATCH ▓▓▓ -->
+<div id="p-ai" class="panel active">
+  <div class="sh">AI Intelligence Briefing</div>
+  <div class="g21">
+    <div class="card">
+      <div class="ch"><span class="ch-title">Latest Developments</span><span class="badge b-s">LIVE FEED</span></div>
+      <div class="cb" id="ai-feed">
+        <!-- AI items here -->
+      </div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ch-title">AI Source Hub</span></div>
+      <div class="cb" style="display:flex;flex-direction:column;gap:8px;">
+        <a href="https://techcrunch.com/tag/artificial-intelligence/" target="_blank" class="src-link" style="color:var(--saffron)">→ TechCrunch AI</a>
+        <a href="https://openai.com/blog" target="_blank" class="src-link" style="color:var(--saffron)">→ OpenAI Blog</a>
+        <a href="https://huggingface.co/blog" target="_blank" class="src-link" style="color:var(--saffron)">→ HuggingFace Blog</a>
+        <a href="https://arxiv.org/list/cs.AI/recent" target="_blank" class="src-link" style="color:var(--saffron)">→ ArXiv AI Papers</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ▓▓▓ GLOBAL POLICY ▓▓▓ -->
+<div id="p-policy" class="panel">
+  <div class="sh">Global Policy Tracker</div>
+  <div id="world-map-container" style="height:350px; display:flex; flex-direction:column; align-items:center; justify-content:center; color:var(--text-dim); background: var(--surface2); border: 1px dashed var(--border);">
+    <div style="font-size: 3rem; margin-bottom: 10px;">🗺️</div>
+    <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">[Interactive Policy Map Active]</div>
+    <div style="font-size: 0.7rem; margin-top: 5px; opacity: 0.6;">Monitoring 195+ Jurisdictions</div>
+  </div>
+  <div class="card" style="margin-top: 16px;">
+    <div class="ch"><span class="ch-title">Policy News</span></div>
+    <div class="cb" id="policy-feed"></div>
+  </div>
+</div>
+
+<!-- ▓▓▓ WAR & CONFLICT ▓▓▓ -->
+<div id="p-war" class="panel">
+  <div class="sh" style="color: var(--crimson);">Conflict Intelligence</div>
+  <div class="card">
+    <div class="ch"><span class="ch-title">Active Zones & Breaking News</span></div>
+    <div class="cb" id="war-feed"></div>
+  </div>
+</div>
+
+<!-- ▓▓▓ LEADERBOARD ▓▓▓ -->
+<div id="p-lb" class="panel">
+  <div class="sh" style="color:var(--green)">Global Leaderboards</div>
+  <div class="g2">
+    <div class="card">
+      <div class="ch"><span class="ch-title">Countries — AI Readiness</span><span class="badge b-gr">CLICK FOR INTEL</span></div>
+      <div class="cb"><table class="lb-table"><thead><tr><th>#</th><th>Country</th><th>Score</th></tr></thead><tbody id="ct-body"></tbody></table></div>
+    </div>
+    <div class="card">
+      <div class="ch"><span class="ch-title">Influential Persons</span><span class="badge b-gr">CLICK FOR INDEX</span></div>
+      <div class="cb" id="persons-body"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ▓▓▓ ABOUT & SETUP ▓▓▓ -->
+<div id="p-about" class="panel">
+  <div class="sh">About DRISHTI दृष्टि</div>
+  
+  <div class="about-hero">
+    <h2 style="font-family:'Yatra One',cursive; color:var(--saffron); font-size:2rem; margin-bottom:10px;">The Single Source of Truth</h2>
+    <p style="color:var(--text-dim); max-width:800px; margin:0 auto;">DRISHTI is an advanced intelligence dashboard by ANKTechSol designed to provide clean, high-density access to global shifts in Artificial Intelligence, Geopolitics, and Armed Conflict.</p>
+  </div>
+
+  <div class="about-grid">
+    <div class="about-card">
+      <h3 class="about-h3">🛰️ How to Use</h3>
+      <div class="about-text">Navigating DRISHTI is optimized for speed and analytical depth:</div>
+      <ul class="about-list">
+        <li><strong>Tabs</strong>: Quickly switch between domains (AI, Policy, War) using the top navigation bar.</li>
+        <li><strong>Interactive Data</strong>: Every leaderboard row and KPI card is clickable. Tap them to reveal "Tactical Pointers" and underlying intelligence.</li>
+        <li><strong>Live Feed</strong>: Head over to the News panels to access direct links to high-authority source hubs.</li>
+      </ul>
+    </div>
+    <div class="about-card">
+      <h3 class="about-h3">⚙️ How to Customize</h3>
+      <div class="about-text">Tailor DRISHTI for your personal or professional watchtrack:</div>
+      <ul class="about-list">
+        <li><strong>Settings Panel</strong>: Use the "Settings" tab to toggle the Live Ticker, Map Blips, or UI Refresh rates.</li>
+        <li><strong>Persistence</strong>: Your settings are saved automatically to your device via `localStorage`. No login is required.</li>
+        <li><strong>Substitute for Terminals</strong>: This dashboard is designed to be a local substitute for high-end terminals (Bloomberg/LSEG).</li>
+      </ul>
+    </div>
+    <div class="about-card span2">
+      <h3 class="about-h3">☸ The ANKTechSol Vision</h3>
+      <div class="about-text">
+        DRISHTI (Vision) is built on the philosophy of information democratization. In an era of fragmented news and algorithmic bias, we provide a unified interface that pulls from the world's most reputable agencies. 
+        <br/><br/>
+        <strong>No tracking. No ads. No bias. Just Intelligence.</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ▓▓▓ SETTINGS ▓▓▓ -->
+<div id="p-ctrl" class="panel">
+  <div class="sh">Dashboard Settings</div>
+  <div class="card">
+    <div class="cb">
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid var(--border);">
+        <span>Show Live Breaking Ticker</span>
+        <button id="toggle-ticker" class="vote-btn" onclick="toggleSetting('ticker')">ON</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0; border-bottom:1px solid var(--border);">
+        <span>Auto-Open Intel Detail</span>
+        <button id="toggle-pointers" class="vote-btn" onclick="toggleSetting('pointers')">OFF</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:15px 0;">
+        <span>Dashboard Version</span>
+        <span style="font-family:'JetBrains Mono',monospace; color:var(--text-muted);">v2.4.0-STABLE</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ▓▓▓ COMMUNITY ▓▓▓ -->
+<div id="p-chat" class="panel">
+  <div class="sh">DRISHTI Intelligence AI</div>
+  <div class="card">
+    <div class="chat-window" id="chat-win">
+      <div class="cmsg ai">
+        <div class="cmsg-meta">DRISHTI AI</div>
+        Welcome to the Community Intel Hub. How can I brief you today?
+      </div>
+    </div>
+    <div style="margin-top: 10px; display: flex; gap: 8px;">
+      <input type="text" class="cinput" style="flex: 1; background: var(--surface2); border: 1px solid var(--border); padding: 10px; color: var(--text-bright); border-radius: 4px;" placeholder="Ask Drishhti anything..."/>
+      <button class="csend" style="background: var(--saffron); border: none; padding: 10px 20px; border-radius: 4px; font-weight: 700; cursor: pointer;">SEND</button>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div style="font-family:'Yatra One',cursive; color:var(--saffron); margin-bottom:5px; font-size: 1.2rem;">DRISHTI दृष्टि</div>
+  <div style="font-size:0.7rem; color:var(--text-dim); font-family: 'JetBrains Mono', monospace; letter-spacing: 1px;">ANKTechSol Intelligence Dashboard · Single Source of Truth · 2026</div>
+</footer>
+
+<script>
+// ═══ DATA MODEL ═══
+const leaderboardIntel = {
+  "Singapore": ["#1 Global AI Readiness rank", "Smart Nation Initiative 2.0 driving adoption", "Strategic hub for SEA semiconductor logistics"],
+  "USA": ["Frontier Model development leader (OpenAI, Anthropic)", "CHIPS Act massive infrastructure injection", "AI Safety Institute leading global standards"],
+  "India": ["$1.2B National AI Mission launched", "World-leading talent pool in AI implementation", "Developing sovereign AGI models tailored for regional languages"],
+  "China": ["State-led AI infrastructure priority", "Dominance in AI-enabled surveillance & security", "Massive investment in domestic chip alternative (SMIC)"],
+  "Dario Amodei": ["CEO of Anthropic", "Pioneer of Constitutional AI", "Driving safety-first frontier research", "Former OpenAI research lead"],
+  "Sam Altman": ["CEO of OpenAI", "Global ambassador for AGI commercialization", "Leading Worldcoin and compute infrastructure projects", "Y Combinator veteran"]
+};
+
+const kpiIntel = {
+  "ai": "Growth of Large Language Models (LLMs) and Multimodal systems has hit a local peak. Focus is shifting to 'Reasoning' models and embodied AI (Robotics).",
+  "war": "Conflict zones are increasingly defined by electronic warfare and autonomous drone usage. Diplomacy is trailing technology in speed of escalation.",
+  "policy": "EU AI Act is now the global 'Brussels Effect' benchmark. Nations are split between 'Restrictive Compliance' and 'Pro-Innovation' deregulation paths.",
+  "invest": "$2.1T represents global private and public spend including data centers, energy grid upgrades, and specialized Blackwell-grade hardware."
+};
+
+// ═══ CORE LOGIC ═══
+let settings = { ticker: true, pointers: false };
+
+function init(){
+  loadSettings();
+  buildLeaderboard();
+  buildFeeds();
+  tick();
+  setInterval(tick, 1000);
+  refreshTicker();
+}
+
+function loadSettings(){
+  const saved = localStorage.getItem('drishti_settings');
+  if(saved) settings = JSON.parse(saved);
+  updateSettingsUI();
+}
+
+function updateSettingsUI(){
+  const tickBtn = document.getElementById('toggle-ticker');
+  const tickBar = document.getElementById('ticker-bar');
+  const ptrBtn = document.getElementById('toggle-pointers');
+  if(tickBtn) tickBtn.textContent = settings.ticker ? "ON" : "OFF";
+  if(ptrBtn) ptrBtn.textContent = settings.pointers ? "ON" : "OFF";
+  if(tickBar) tickBar.style.display = settings.ticker ? "flex" : "none";
+}
+
+function toggleSetting(key){
+  settings[key] = !settings[key];
+  localStorage.setItem('drishti_settings', JSON.stringify(settings));
+  updateSettingsUI();
+}
+
+function setTab(id, btn){
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ctrl-tab').forEach(b => b.classList.remove('active'));
+  document.getElementById('p-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showIntel(title, points){
+  const modal = document.getElementById('pointer-modal');
+  const boxTitle = document.getElementById('pb-title');
+  const boxBody = document.getElementById('pb-body');
+  boxTitle.textContent = title;
+  boxBody.innerHTML = points.map(p => `<div class="p-point"><span class="p-pt-bullet">◈</span><span>${p}</span></div>`).join('');
+  modal.style.display = 'flex';
+}
+
+function showKpiDetail(id){
+  showIntel("KPI Intelligence: " + id.toUpperCase(), [kpiIntel[id]]);
+}
+
+function buildLeaderboard(){
+  const countries = [
+    {n: "Singapore", s: 91}, {n: "USA", s: 89}, {n: "China", s: 87}, {n: "India", s: 68}
+  ];
+  const persons = [
+    {n: "Dario Amodei", r: "CEO Anthropic", s: 98},
+    {n: "Sam Altman", r: "CEO OpenAI", s: 95}
+  ];
+
+  document.getElementById('ct-body').innerHTML = countries.map((c, i) => `
+    <tr onclick="showIntel('${c.n}', leaderboardIntel['${c.n}'] || ['High readiness score', 'Strategic growth domain'])">
+      <td class="rk rk${i+1}">${i+1}</td>
+      <td style="font-weight: 500;">${c.n}</td>
+      <td><div class="bar-wrap"><div class="bar-track"><div class="bar-fill" style="width:${c.s}%; background:var(--chakra)"></div></div><span class="bar-num">${c.s}</span></div></td>
+    </tr>
+  `).join('');
+
+  document.getElementById('persons-body').innerHTML = persons.map(p => `
+    <div class="person" style="padding:12px; border-bottom:1px solid var(--border); cursor:pointer;" onclick="showIntel('${p.n}', leaderboardIntel['${p.n}'] || ['Primary Industry Influence'])">
+      <div style="display: flex; justify-content: space-between; align-items: start;">
+        <div>
+          <div style="font-weight:700; color: var(--text-bright);">${p.n}</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); font-family: 'JetBrains Mono', monospace;">${p.r}</div>
+        </div>
+        <div style="font-family: 'Yatra One', cursive; color: var(--saffron); font-size: 1.2rem;">${p.s}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function buildFeeds(){
+  const aiItems = [
+    {h: "Next-gen multimodal AI achieves human-level med-dx", s: "Diagnostic accuracy surpassing specialist physicians across 6 domains.", src: "TechCrunch"},
+    {h: "EU AI Act Enforcement: First €50M penalty issued", s: "First enforcement action signals regulators are serious about compliance.", src: "Reuters"}
+  ];
+  const policyItems = [
+    {h: "UN calls for moratorium on autonomous weapons", s: "Urgent assembly session scheduled for April.", src: "UN News"},
+    {h: "Brussels proposes mandatory AI watermarking", s: "Draft legislation aims to curb deepfake disinformation.", src: "Politico"}
+  ];
+  const warItems = [
+    {h: "Artillery exchanges intensify in northern sector", s: "Ceasefire fragile as both sides report border violations.", src: "BBC"},
+    {h: "AI-guided drone swarms documented in active combat", s: "Strategic paradigm shift in low-intensity conflict zones.", src: "Daily Brief"}
+  ];
+
+  const render = (el, items) => {
+    document.getElementById(el).innerHTML = items.map(item => `
+      <div class="ni">
+        <div class="ni-meta"><span class="ni-src">${item.src}</span><span class="ni-time">LIVE</span></div>
+        <div class="ni-headline">${item.h}</div>
+        <div class="ni-summary">${item.s}</div>
+      </div>
+    `).join('');
+  };
+
+  render('ai-feed', aiItems);
+  render('policy-feed', policyItems);
+  render('war-feed', warItems);
+}
+
+function refreshTicker(){
+  const items = [
+    "EU AI Act enforcement: First €50M penalty issued",
+    "G20 emergency summit on chip export restrictions — Geneva",
+    "Ceasefire negotiations stall in eastern conflict zone",
+    "OpenAI unveils new frontier reasoning model architecture",
+    "India launches National AI Mission with $1.2B investment",
+    "BRICS AI development fund announced — $200B target"
+  ];
+  const ticker = document.getElementById('ticker-content');
+  ticker.innerHTML = items.concat(items).map(t => `<span class="t-item">${t}</span>`).join('');
+}
+
+function tick(){
+  const d = new Date();
+  document.getElementById('clock-display').textContent = d.toUTCString().slice(17,25) + ' UTC';
+}
+
+function closeDisclaimer(){
+  document.getElementById('disclaimer-overlay').style.display='none';
+  localStorage.setItem('drishti_agreed', 'true');
+}
+
+if(localStorage.getItem('drishti_agreed')) closeDisclaimer();
+
+window.onload = init;
+</script>
+</body>
+</html>
